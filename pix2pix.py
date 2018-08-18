@@ -235,9 +235,12 @@ def load_examples():
         raise Exception("input_dir does not exist")
 
     input_paths = glob.glob(os.path.join(a.input_dir, "*.jpg"))
+    # add the case when image extension could be capital
+    input_paths = input_paths + glob.glob(os.path.join(a.input_dir, "*.JPG"))
     decode = tf.image.decode_jpeg
     if len(input_paths) == 0:
         input_paths = glob.glob(os.path.join(a.input_dir, "*.png"))
+        input_paths = input_paths + glob.glob(os.path.join(a.input_dir, "*.PNG"))
         decode = tf.image.decode_png
 
     if len(input_paths) == 0:
